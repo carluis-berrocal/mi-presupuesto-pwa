@@ -433,6 +433,21 @@ button:active {
     height: 1rem;
 }
 
+.creada {
+    display: block;
+    text-align: center;
+    font-size: 0.875rem;
+    color: #9333ea;
+    margin-top: 1rem;
+    
+
+}
+.creada a {
+    color: #9333ea;
+    text-decoration: none;
+}
+
+
 .hidden {
     display: none !important;
 }
