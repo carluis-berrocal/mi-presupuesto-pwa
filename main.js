@@ -120,7 +120,7 @@ async function addOrUpdateExpense() {
       `⚠️ El valor a ingresar (${amountNum.toLocaleString()}) supera lo que te queda de presupuesto (${remaining.toLocaleString()})`,
       "warning",
     );
-    return;
+    // return;
   }
 
   try {
