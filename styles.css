@@ -1,0 +1,457 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    background: linear-gradient(135deg, #faf5ff 0%, #fce7f3 50%, #dbeafe 100%);
+    min-height: 100vh;
+    padding: 1rem;
+    padding-bottom: 5rem;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+/* Header */
+.header {
+    text-align: center;
+    margin: 2rem 0;
+}
+
+.icon-container {
+    display: inline-block;
+    background: linear-gradient(135deg, #9333ea, #db2777);
+    padding: 1rem;
+    border-radius: 50%;
+    box-shadow: 0 10px 30px rgba(147, 51, 234, 0.3);
+    margin-bottom: 1rem;
+}
+
+.icon-container svg {
+    width: 3rem;
+    height: 3rem;
+    stroke: white;
+    fill: none;
+}
+
+h1 {
+    font-size: 2.5rem;
+    background: linear-gradient(135deg, #9333ea, #db2777);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 0.5rem;
+}
+
+.subtitle {
+    color: #6b7280;
+    font-size: 1rem;
+}
+
+/* Cards */
+.card {
+    background: white;
+    border-radius: 1.5rem;
+    padding: 2rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+    border: 4px solid;
+}
+
+.card.purple {
+    border-color: #e9d5ff;
+}
+
+.card.green {
+    border-color: #bbf7d0;
+}
+
+.card.orange {
+    border-color: #fed7aa;
+}
+
+.card.red {
+    border-color: #fecaca;
+}
+
+.card.blue {
+    border-color: #bfdbfe;
+}
+
+.card.pink {
+    border-color: #fbcfe8;
+}
+
+.card-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #1f2937;
+    margin-bottom: 1.5rem;
+}
+
+/* Form Elements */
+label {
+    display: block;
+    font-weight: 600;
+    color: #374151;
+    margin-bottom: 0.5rem;
+}
+
+select,
+input {
+    width: 100%;
+    padding: 1rem;
+    border: 2px solid;
+    border-radius: 0.75rem;
+    font-size: 1rem;
+    transition: all 0.3s;
+    outline: none;
+}
+
+select:focus,
+input:focus {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.purple-input {
+    border-color: #d8b4fe;
+    background: #faf5ff;
+}
+
+.purple-input:focus {
+    border-color: #9333ea;
+}
+
+.blue-input {
+    border-color: #93c5fd;
+    background: #eff6ff;
+}
+
+.blue-input:focus {
+    border-color: #2563eb;
+}
+
+input[type="number"].amount {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+/* Buttons */
+button {
+    width: 100%;
+    padding: 1rem;
+    border: none;
+    border-radius: 0.75rem;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+.btn-purple {
+    background: linear-gradient(135deg, #9333ea, #db2777);
+    color: white;
+}
+
+.btn-blue {
+    background: linear-gradient(135deg, #2563eb, #06b6d4);
+    color: white;
+}
+
+.btn-red {
+    background: linear-gradient(135deg, #ef4444, #ec4899);
+    color: white;
+}
+
+.btn-small {
+    padding: 0.5rem 1rem;
+    width: auto;
+    font-size: 0.875rem;
+}
+
+.btn-group {
+    display: flex;
+    gap: 0.75rem;
+}
+
+.btn-group button {
+    flex: 1;
+}
+
+.btn-edit {
+    background: #3b82f6;
+    color: white;
+}
+
+.btn-delete {
+    background: #ef4444;
+    color: white;
+}
+
+.btn-cancel {
+    background: #9ca3af;
+    color: white;
+}
+
+/* Budget Summary */
+.budget-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.budget-header h3 {
+    font-weight: 600;
+    color: #374151;
+}
+
+.budget-amount {
+    font-size: 3rem;
+    font-weight: bold;
+    background: linear-gradient(135deg, #1f2937, #4b5563);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 0.5rem;
+}
+
+.budget-remaining {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+.budget-remaining.green {
+    color: #16a34a;
+}
+
+.budget-remaining.orange {
+    color: #ea580c;
+}
+
+.budget-remaining.red {
+    color: #dc2626;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 1.5rem;
+    background: #e5e7eb;
+    border-radius: 1rem;
+    overflow: hidden;
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 0.5rem;
+}
+
+.progress-fill {
+    height: 100%;
+    transition: width 0.5s, background 0.5s;
+    border-radius: 1rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.progress-fill.green {
+    background: linear-gradient(90deg, #4ade80, #10b981);
+}
+
+.progress-fill.orange {
+    background: linear-gradient(90deg, #fb923c, #f59e0b);
+}
+
+.progress-fill.red {
+    background: linear-gradient(90deg, #f87171, #ef4444);
+}
+
+.progress-text {
+    text-align: right;
+    font-size: 0.875rem;
+    color: #6b7280;
+    font-weight: 600;
+}
+
+/* Expenses List */
+.expense-item {
+    background: linear-gradient(135deg, #fce7f3, #f3e8ff);
+    padding: 1rem;
+    border-radius: 1rem;
+    border: 2px solid #fbcfe8;
+    margin-bottom: 0.75rem;
+    transition: all 0.3s;
+}
+
+.expense-item:hover {
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    transform: scale(1.02);
+}
+
+.expense-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    margin-bottom: 0.5rem;
+}
+
+.expense-name {
+    font-weight: bold;
+    color: #1f2937;
+    font-size: 1.125rem;
+}
+
+.expense-date {
+    font-size: 0.875rem;
+    color: #6b7280;
+}
+
+.expense-amount {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #db2777;
+}
+
+.total-expenses {
+    background: linear-gradient(135deg, #e9d5ff, #fbcfe8);
+    padding: 1rem;
+    border-radius: 1rem;
+    border: 2px solid #d8b4fe;
+    margin-top: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.total-expenses-label {
+    font-weight: bold;
+    color: #374151;
+    font-size: 1.125rem;
+}
+
+.total-expenses-amount {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #9333ea;
+}
+
+/* Alert */
+.alert {
+    position: fixed;
+    top: 1rem;
+    left: 1rem;
+    right: 1rem;
+    padding: 1rem;
+    border-radius: 0.75rem;
+    color: white;
+    font-weight: 600;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    animation: slideIn 0.3s;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.alert.success {
+    background: linear-gradient(135deg, #10b981, #059669);
+}
+
+.alert.error {
+    background: linear-gradient(135deg, #ef4444, #dc2626);
+}
+
+.alert.warning {
+    background: linear-gradient(135deg, #f59e0b, #d97706);
+}
+
+.alert svg {
+    width: 1.5rem;
+    height: 1.5rem;
+    flex-shrink: 0;
+}
+
+/* Install Button */
+.install-btn {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    z-index: 100;
+    padding: 0.75rem 1.5rem;
+    background: linear-gradient(135deg, #6366f1, #9333ea);
+    color: white;
+    border: none;
+    border-radius: 2rem;
+    font-size: 0.875rem;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 5px 20px rgba(99, 102, 241, 0.4);
+    display: none;
+    align-items: center;
+    gap: 0.5rem;
+    width: auto;
+}
+
+.install-btn.show {
+    display: flex;
+}
+
+.install-btn svg {
+    width: 1rem;
+    height: 1rem;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+    h1 {
+        font-size: 2rem;
+    }
+
+    .budget-amount {
+        font-size: 2.5rem;
+    }
+
+    .budget-remaining {
+        font-size: 1.5rem;
+    }
+
+    .card {
+        padding: 1.5rem;
+    }
+}

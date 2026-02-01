@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#9333ea">
+    <title>Mi Presupuesto - Administrador</title>
+    <link rel="manifest" href="manifest.json?v=1.0.1">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <button class="install-btn" id="installBtn">
+        <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="7 10 12 15 17 10"></polyline>
+            <line x1="12" y1="15" x2="12" y2="3"></line>
+        </svg>
+        Instalar App
+    </button>
+
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="icon-container">
+                <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1"></path>
+                    <path d="M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4"></path>
+                </svg>
+            </div>
+            <h1>Mi Presupuesto</h1>
+            <p class="subtitle">Administra tus gastos inteligentemente</p>
+        </div>
+
+        <!-- Budget Configuration Form -->
+        <div class="card purple" id="budgetForm">
+            <h2 class="card-title">Configura tu presupuesto</h2>
+            <div class="form-group">
+                <label>Período</label>
+                <select id="period" class="purple-input">
+                    <option value="semanal">Semanal</option>
+                    <option value="quincenal">Quincenal</option>
+                    <option value="mensual" selected>Mensual</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Presupuesto</label>
+                <input type="number" id="budgetAmount" class="purple-input amount" placeholder="Ingresa tu presupuesto">
+            </div>
+            <button class="btn-purple" onclick="saveBudget()">
+                Establecer Presupuesto
+            </button>
+        </div>
+
+        <!-- Budget Summary -->
+        <div class="card hidden" id="budgetSummary">
+            <div class="budget-header">
+                <h3 id="budgetPeriodTitle">Presupuesto mensual</h3>
+                <button class="btn-small btn-purple" onclick="editBudget()">
+                    <svg width="16" height="16" stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                        <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                    </svg>
+                    Editar
+                </button>
+            </div>
+            <div class="budget-amount" id="budgetTotal">$0</div>
+            <div class="budget-remaining" id="budgetRemaining">Restante: $0</div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill" style="width: 100%"></div>
+            </div>
+            <div class="progress-text" id="progressText">100% disponible</div>
+        </div>
+
+        <!-- Expense Form -->
+        <div class="card blue hidden" id="expenseFormCard">
+            <h2 class="card-title" id="expenseFormTitle">Agregar Gasto</h2>
+            <div class="form-group">
+                <label>Descripción</label>
+                <input type="text" id="expenseName" class="blue-input" placeholder="Ej: Servicio de energía">
+            </div>
+            <div class="form-group">
+                <label>Monto</label>
+                <input type="number" id="expenseAmount" class="blue-input amount" placeholder="0">
+            </div>
+            <div class="btn-group" id="expenseButtons">
+                <button class="btn-blue" onclick="addOrUpdateExpense()">
+                    <svg width="20" height="20" stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="12" y1="5" x2="12" y2="19"></line>
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                    </svg>
+                    Agregar
+                </button>
+            </div>
+        </div>
+
+        <!-- Expenses List -->
+        <div class="card pink hidden" id="expensesCard">
+            <h2 class="card-title">Mis Gastos</h2>
+            <div id="expensesList"></div>
+            <div class="total-expenses">
+                <span class="total-expenses-label">Total Gastado:</span>
+                <span class="total-expenses-amount" id="totalExpenses">$0</span>
+            </div>
+        </div>
+
+        <!-- Reset Button -->
+        <button class="btn-red hidden" id="resetBtn" onclick="resetAll()">
+            <svg width="24" height="24" stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="1 4 1 10 7 10"></polyline>
+                <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path>
+            </svg>
+            Resetear Todo
+        </button>
+    </div>
+    <script src="main.js"></script>
+</body>
+</html>
