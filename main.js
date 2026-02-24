@@ -33,39 +33,49 @@ window.addEventListener("load", () => {
 });
 
 document.getElementById("installBtn").addEventListener("click", async () => {
-  // ✅ Android / PC compatibles
+
+  // Si ya está instalada
+  if (isAppInstalled()) {
+    showAlert("La app ya está instalada ✅", "success");
+    return;
+  }
+
+  // Si el navegador soporta instalación automática
   if (deferredPrompt) {
     deferredPrompt.prompt();
     const { outcome } = await deferredPrompt.userChoice;
+
     if (outcome === "accepted") {
+      localStorage.setItem("appInstalled", "true");
       document.getElementById("installBtn").classList.remove("show");
     }
+
     deferredPrompt = null;
     return;
   }
 
-  // 🍏 iPhone
+  // Si es iPhone
   if (isIOS()) {
     showAlert(
-      "En iPhone toca el botón Compartir y luego 'Añadir a pantalla de inicio'",
-      "warning",
+      "En iPhone toca Compartir → 'Añadir a pantalla de inicio'",
+      "warning"
     );
     return;
   }
 
-  // 🌐 Navegadores internos (Facebook, Instagram, etc)
+  // Si es navegador interno
   if (isInAppBrowser()) {
     showAlert(
       "Abre esta página en Chrome para poder instalar la app",
-      "warning",
+      "warning"
     );
     return;
   }
 
-  // 💻 Otros navegadores
+  // Si realmente no soporta instalación automática
   showAlert(
-    "Usa el menú del navegador para 'Instalar aplicación' o 'Añadir a inicio'",
-    "warning",
+    "Tu navegador no permite instalación automática. Usa el menú del navegador.",
+    "warning"
   );
 });
 
