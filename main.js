@@ -11,72 +11,14 @@ window.addEventListener("beforeinstallprompt", (e) => {
   document.getElementById("installBtn").classList.add("show");
 });
 
-window
-  .matchMedia("(display-mode: standalone)")
-  .addEventListener("change", (e) => {
-    if (e.matches) {
-      const btn = document.getElementById("installBtn");
-      if (btn) btn.classList.remove("show");
-    }
-  });
-// Mostrar botón también en dispositivos donde no hay evento
-window.addEventListener("load", () => {
-  const btn = document.getElementById("installBtn");
-
-  if (!btn) return; // seguridad por si el DOM aún no está listo
-
-  if (isAppInstalled()) {
-    btn.classList.remove("show");
-  } else {
-    btn.classList.add("show");
-  }
-});
-
 document.getElementById("installBtn").addEventListener("click", async () => {
-
-  // Si ya está instalada
-  if (isAppInstalled()) {
-    showAlert("La app ya está instalada ✅", "success");
-    return;
+  if (!deferredPrompt) return;
+  deferredPrompt.prompt();
+  const { outcome } = await deferredPrompt.userChoice;
+  if (outcome === "accepted") {
+    document.getElementById("installBtn").classList.remove("show");
   }
-
-  // Si el navegador soporta instalación automática
-  if (deferredPrompt) {
-    deferredPrompt.prompt();
-    const { outcome } = await deferredPrompt.userChoice;
-
-    if (outcome === "accepted") {
-      localStorage.setItem("appInstalled", "true");
-      document.getElementById("installBtn").classList.remove("show");
-    }
-
-    deferredPrompt = null;
-    return;
-  }
-
-  // Si es iPhone
-  if (isIOS()) {
-    showAlert(
-      "En iPhone toca Compartir → 'Añadir a pantalla de inicio'",
-      "warning"
-    );
-    return;
-  }
-
-  // Si es navegador interno
-  if (isInAppBrowser()) {
-    showAlert(
-      "Abre esta página en Chrome para poder instalar la app",
-      "warning"
-    );
-    return;
-  }
-
-  // Si realmente no soporta instalación automática
-  showAlert(
-    "Tu navegador no permite instalación automática. Usa el menú del navegador.",
-    "warning"
-  );
+  deferredPrompt = null;
 });
 
 // Storage manager - usa window.storage si está disponible, sino memoria
@@ -401,20 +343,6 @@ document.getElementById("expenseAmount").addEventListener("keypress", (e) => {
   if (e.key === "Enter") addOrUpdateExpense();
 });
 
-function isIOS() {
-  return /iphone|ipad|ipod/i.test(navigator.userAgent);
-}
-
-function isInAppBrowser() {
-  return /(FBAN|FBAV|Instagram|Messenger)/i.test(navigator.userAgent);
-}
-
-function isAppInstalled() {
-  return (
-    window.matchMedia("(display-mode: standalone)").matches ||
-    window.navigator.standalone === true
-  );
-}
 
 // Load data on page load
 loadData();
