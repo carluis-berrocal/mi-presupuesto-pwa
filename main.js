@@ -11,14 +11,47 @@ window.addEventListener("beforeinstallprompt", (e) => {
   document.getElementById("installBtn").classList.add("show");
 });
 
+// Mostrar botón también en dispositivos donde no hay evento
+window.addEventListener("load", () => {
+  const btn = document.getElementById("installBtn");
+  btn.classList.add("show");
+});
+
 document.getElementById("installBtn").addEventListener("click", async () => {
-  if (!deferredPrompt) return;
-  deferredPrompt.prompt();
-  const { outcome } = await deferredPrompt.userChoice;
-  if (outcome === "accepted") {
-    document.getElementById("installBtn").classList.remove("show");
+  // ✅ Android / PC compatibles
+  if (deferredPrompt) {
+    deferredPrompt.prompt();
+    const { outcome } = await deferredPrompt.userChoice;
+    if (outcome === "accepted") {
+      document.getElementById("installBtn").classList.remove("show");
+    }
+    deferredPrompt = null;
+    return;
   }
-  deferredPrompt = null;
+
+  // 🍏 iPhone
+  if (isIOS()) {
+    showAlert(
+      "En iPhone toca el botón Compartir y luego 'Añadir a pantalla de inicio'",
+      "warning",
+    );
+    return;
+  }
+
+  // 🌐 Navegadores internos (Facebook, Instagram, etc)
+  if (isInAppBrowser()) {
+    showAlert(
+      "Abre esta página en Chrome para poder instalar la app",
+      "warning",
+    );
+    return;
+  }
+
+  // 💻 Otros navegadores
+  showAlert(
+    "Usa el menú del navegador para 'Instalar aplicación' o 'Añadir a inicio'",
+    "warning",
+  );
 });
 
 // Storage manager - usa window.storage si está disponible, sino memoria
@@ -342,6 +375,14 @@ document.getElementById("budgetAmount").addEventListener("keypress", (e) => {
 document.getElementById("expenseAmount").addEventListener("keypress", (e) => {
   if (e.key === "Enter") addOrUpdateExpense();
 });
+
+function isIOS() {
+  return /iphone|ipad|ipod/i.test(navigator.userAgent);
+}
+
+function isInAppBrowser() {
+  return /(FBAN|FBAV|Instagram|Messenger)/i.test(navigator.userAgent);
+}
 
 // Load data on page load
 loadData();
